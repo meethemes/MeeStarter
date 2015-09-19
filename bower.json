@@ -1,0 +1,21 @@
+{
+  "name": "MeeStarter",
+  "version": "0.0.0",
+  "authors": [
+    "MeeThemes <mail@meethemes.com>"
+  ],
+  "description": "Starter template for creating HTML layouts",
+  "license": "ISC",
+  "homepage": "http://meethemes.com/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.3",
+    "bootstrap-sass": "~3.3.5",
+    "font-awesome": "fontawesome#~4.4.0",
+    "jquery": "~2.1.4"
+  }
+}
