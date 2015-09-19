@@ -7,6 +7,7 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
     gulpif = require('gulp-if'),
+    imagemin = require('gulp-imagemin'),
     open = require('gulp-open'),
     rigger = require('gulp-rigger'),
     sass = require('gulp-sass'),
@@ -60,12 +61,14 @@ var options = {
 var path = {
     build: {
         html: './built',
+        images: './built/img',
         js: './built/js',
         sass: './built/css',
         zip: './packed'
     },
     src: {
         html: './src/html/*.html',
+        images: './src/img/**/*.*',
         js: './src/js/*.js',
         sass: './src/scss/**/*.scss',
         zip: {
@@ -83,6 +86,7 @@ var path = {
     },
     watch: {
         html: './src/html/**/*.html',
+        images: './src/img/**/*.*',
         js: './src/js/**/*.js',
         sass: './src/scss/**/*.scss'
     }
@@ -157,12 +161,35 @@ gulp.task('html:build', function() {
 });
 
 
+//=== IMAGES === //
+// dev
+gulp.task('images:dev', function() {
+    gulp.src(path.src.images)
+        .pipe(gulp.dest(path.build.images))
+        .pipe(connect.reload());
+});
+
+// build
+gulp.task('images:build', function() {
+    gulp.src(path.src.images)
+        .pipe(imagemin({
+            progressive: true
+        }))
+        .pipe(gulp.dest(path.build.images));
+});
+
+
 // === Watch === //
 // dev
 gulp.task('watch:dev', function() {
     // HTML
     watch([path.watch.html], function() {
         gulp.start('html:dev');
+    });
+
+    // Images
+    watch([path.watch.images], function() {
+        gulp.start('images:dev');
     });
 
     // JS
@@ -194,6 +221,7 @@ gulp.task('zip:built', function() {
 
 gulp.task('dev', function() {
     gulp.run('html:dev');
+    gulp.run('images:dev');
     gulp.run('js:dev');
     gulp.run('sass:dev');
 
