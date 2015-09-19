@@ -11,4 +11,13 @@ In **gulpfile.js** find ``options`` variable. There you can configure some gulp 
 
 ## Running
 ### gulp dev
-Run this command to start development. It will build all your sources, run watcher, server and
+Run this command to start development. It will build all your sources, run watcher and server.
+
+### gulp build
+This task will compile all your sources with minification and optimization.
+
+### gulp pack
+* `gulp pack:all` will pack into zip all source and built files except *node_modules* and *bower_components*.
+* `gulp pack:built` will pack into zip only *built* directory.
+
+Both tasks first of all will run **gulp build**.
