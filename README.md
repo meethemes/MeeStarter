@@ -21,3 +21,6 @@ This task will compile all your sources with minification and optimization.
 * `gulp pack:built` will pack into zip only *built* directory.
 
 Both tasks first of all will run **gulp build**.
+
+## Help
+If you found issues or have some suggestions, you can create issue on [this page](https://github.com/meethemes/MeeStarter/issues).
