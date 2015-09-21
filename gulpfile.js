@@ -1,5 +1,5 @@
 /*!
- * MeeStarter
+ * MeeStarter v1.0.0
  * Simple starter template for faster creating HTML layouts.
  * http://meethemes.com/
  */
