@@ -84,7 +84,7 @@ var options = {
     },
 
     dev: {
-        tasks: ['html', 'images', 'js', 'sass', 'server'],
+        tasks: ['html', 'images', 'js', 'sass', 'server', 'watch'],
 
         sass: {
             sourcemaps: true
@@ -150,12 +150,6 @@ gulp.task('html', function() {
         .pipe( rigger() )
         .pipe( gulp.dest(path.build.html) )
         .pipe( gulpif( utils.isInArray('server', _options.tasks), connect.reload()) );
-
-    if(_options.watch.html === true) {
-        watch([path.watch.html], function() {
-            gulp.start('html');
-        });
-    }
 });
 
 
@@ -167,12 +161,6 @@ gulp.task('images', function() {
         })) )
         .pipe( gulp.dest(path.build.images) )
         .pipe( gulpif( utils.isInArray('server', _options.tasks), connect.reload()) );
-
-    if(_options.watch.images === true) {
-        watch([path.watch.images], function() {
-            gulp.start('images');
-        });
-    }
 });
 
 
@@ -183,12 +171,6 @@ gulp.task('js', function() {
         .pipe( gulpif(_options.js.uglify, uglify()) )
         .pipe( gulp.dest(path.build.js) )
         .pipe( gulpif( utils.isInArray('server', _options.tasks), connect.reload()) );
-
-    if(_options.watch.js === true) {
-        watch([path.watch.js], function() {
-            gulp.start('js');
-        });
-    }
 });
 
 
@@ -202,12 +184,6 @@ gulp.task('sass', function() {
         .pipe( gulpif(_options.sass.sourcemaps, sourcemaps.write()) )
         .pipe( gulp.dest(path.build.sass) )
         .pipe( gulpif( utils.isInArray('server', _options.tasks), connect.reload()) );
-
-    if(_options.watch.sass === true) {
-        watch([path.watch.sass], function() {
-            gulp.start('sass');
-        });
-    }
 });
 
 
@@ -221,6 +197,34 @@ gulp.task('server', function () {
 
     gulp.src(__filename)
         .pipe( open({uri: 'http://localhost:' + _options.server.port}) );
+});
+
+
+// === Watch === //
+gulp.task('watch', function () {
+    if(_options.watch.html === true) {
+        watch([path.watch.html], function() {
+            gulp.start('html');
+        });
+    }
+
+    if(_options.watch.images === true) {
+        watch([path.watch.images], function() {
+            gulp.start('images');
+        });
+    }
+
+    if(_options.watch.js === true) {
+        watch([path.watch.js], function() {
+            gulp.start('js');
+        });
+    }
+
+    if(_options.watch.sass === true) {
+        watch([path.watch.sass], function() {
+            gulp.start('sass');
+        });
+    }
 });
 
 
